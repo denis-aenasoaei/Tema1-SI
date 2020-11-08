@@ -108,7 +108,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         answ = decrypt_CBC(s.recv(16), enc_key)
     elif enc_type == "OFB":
         answ = decrypt_CBC(s.recv(16), enc_key)
-    print(answ.decode())
     if answ.decode() == "START":
         with open("test.txt", "r") as f:
             while 1:
@@ -120,4 +119,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     s.sendall(encrypt_CBC(text, enc_key))
                 elif enc_type == "OFB":
                     s.sendall(encrypt_OFB(text, enc_key))
-        s.sendall(encrypt_CBC("STOP", enc_key))
